@@ -1,4 +1,4 @@
-#使用colortool美化powershell界面
+#使用colortool和oh-my-posh美化powershell界面
 #参考：https://ppundsh.github.io/posts/ad6e/
 $shellPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Function FindLineIndexFromProfile($content){
