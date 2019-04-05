@@ -56,10 +56,10 @@ do{
 }while($(Read-Host "Are you sure to set this theme as the default theme? [Y]es or [N]o").ToLower() -eq 'n')
 if($color -ne $null -and $color -ne '' -and $color -ne 'e'){
 	colortool -d $color
-	$out =((Get-Content $profile) | Where {!($_.StartsWith('color-tool '))}) 
+	$out =((Get-Content $profile) | Where {!($_.StartsWith('colortool -q '))}) 
 	#写入新设定的主题
 	$out > $profile
-	('colortool ' + $color) >> $profile
+	('colortool -q ' + $color) >> $profile
 }
 clear
 #设置powershell的主题
