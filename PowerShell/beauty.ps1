@@ -87,7 +87,7 @@ if($null -ne $theme -and $theme -ne '' -and $theme -ne 'e'){
 #安装适用于PowerShell的字体
 if(!(Test-Path (join-path $env:windir "Fonts\sarasa-monoT-sc-regular.ttf"))){
 	$confirm = Read-Host "Would you want to install some font for powershell? [Y]es or [N]o"
-	if($confirm = Read-Host "Would you want to install some font for powershell? [Y]es or [N]o"){
+	if($confirm.ToLower() -eq 'y'){
 		$objShell = New-Object -ComObject Shell.Application
 		$objFolder = $objShell.Namespace(0x14)
 		$objFolder.CopyHere("$shellPath\powershell-fonts\sarasa-monoT-sc-regular.ttf")
@@ -97,3 +97,4 @@ if(!(Test-Path (join-path $env:windir "Fonts\sarasa-monoT-sc-regular.ttf"))){
 # Import-Module -Name (Join-Path $shellPath "\modules\set-console-font.psm1")
 # Get-ConsoleFontInfo | Format-Table -AutoSize
 Write-Output "Complete"
+clear
