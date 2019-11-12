@@ -27,3 +27,4 @@ Function KillPort($port,$force=0){
 		}
 	}
 }
+Stop-Process -Id (Get-NetTCPConnection -LocalPort :port).OwningProcess -Force
