@@ -39,28 +39,28 @@ try{
 	Write-Output "install scoop"
 	Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh')
 }
-# try{
-	# colortool -s
-# } catch {
-	# Write-Output "install color-tool"
-	# scoop install colortool
-	# Write-Output "list all themes"
-	# colortool -s
-# }
-# do{
-	# $color=Read-Host "Please enter the name of your favorite color-theme,or enter 'e' to exit"
-	# if($null -eq $color -or $color -eq '' -or $color -eq 'e'){
-		# break
-	# }
-	# colortool $color
-# }while($(Read-Host "Are you sure to set this theme as the default theme? [Y]es or [N]o").ToLower() -eq 'n')
-# if($null -ne $color -and $color -ne '' -and $color -ne 'e'){
-	# colortool -d $color
-	# $out =((Get-Content $profile) | Where-Object {!($_.StartsWith('colortool -q '))}) 
-	# #写入新设定的主题
-	# $out > $profile
-	# ('colortool -q ' + $color) >> $profile
-# }
+try{
+	colortool -s
+} catch {
+	Write-Output "install color-tool"
+	scoop install colortool
+	Write-Output "list all themes"
+	colortool -s
+}
+do{
+	$color=Read-Host "Please enter the name of your favorite color-theme,or enter 'e' to exit"
+	if($null -eq $color -or $color -eq '' -or $color -eq 'e'){
+		break
+	}
+	colortool $color
+}while($(Read-Host "Are you sure to set this theme as the default theme? [Y]es or [N]o").ToLower() -eq 'n')
+if($null -ne $color -and $color -ne '' -and $color -ne 'e'){
+	colortool -d $color
+	$out =((Get-Content $profile) | Where-Object {!($_.StartsWith('colortool -q '))}) 
+	#写入新设定的主题
+	$out > $profile
+	('colortool -q ' + $color) >> $profile
+}
 Clear-Host
 #设置powershell的主题
 Write-Output "Import posh-git"
@@ -77,7 +77,7 @@ do{
 }while($(Read-Host "Are you sure to set this theme as the default theme? [Y]es or [N]o").ToLower() -eq 'n')
 if($null -ne $theme -and $theme -ne '' -and $theme -ne 'e'){
 	#删除之前的主题
-	$out =((Get-Content $profile) | Where-Object {!($_.StartsWith('Set-Theme '))}) 
+	$out =((Get-Content $profile) | Where-Object {!($_.StartsWith('Set-PoshPrompt '))}) 
 	#写入新设定的主题
 	$out > $profile
 	('Set-PoshPrompt -Theme ' + $theme) >> $profile
